@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inter Active Landing PAge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    /* For Chrome, Edge, and Safari */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #111;
+        /* Dark track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #333;
+        /* Scroll handle */
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+        /* Lighter on hover */
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        scrollbar-width: thin;
+        scrollbar-color: #333 #111;
+    }
+
+    body {
+        /* overflow-x: hidden; */
+        overflow: hidden;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        animation: overflowController .3s forwards 9s ease;
+    }
+
+    nav {
+        width: 97.2%;
+        height: 22px;
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.021), black);
+        color: white;
+        padding: 15px 35px;
+        overflow: hidden;
+        z-index: 10;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        transition: all .6s ease;
+        transform: translateY(-85px);
+        animation: leftRightCollapser 1s forwards 11s ease;
+    }
+
+    .nav-logo {
+        position: absolute;
+        top: 3px;
+        left: 48%;
+        width: 45px;
+        height: 45px;
+        cursor: pointer;
+    }
+
+    section {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .first {
+        background-color: #03060f;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .first ::selection {
+        background-color: #009ADA;
+        color: black;
+    }
+    .second ::selection {
+        background-color: rgb(212, 212, 48);
+        color: black;
+    }
+
+    img {
+        user-select: none;
+    }
+
+    .left {
+        position: absolute;
+        left: 0;
+        width: 60%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(0, 0, 0);
+        height: 100vh;
+        transition: all .3s ease;
+        transform: translateX(-1205px);
+        animation: leftRightCollapser 2s forwards 9s ease;
+        pointer-events:visible;
+        /* animation: leftRightCollapser 2s forwards 1s ease; */
+
+        /* transform: rotateX(10deg); */
+    }
+
+    .right {
+        position: absolute;
+        right: 0;
+        width: 40%;
+        color: white;
+        background-color: #009ADA;
+        height: 100vh;
+        /* transform: skewX(-15deg) translateX(1415px); */
+        transform: translateX(1415px);
+        transition: all .3s ease;
+        animation: leftRightCollapser 2s forwards 9s ease;
+        /* animation: leftRightCollapser 2s forwards 1s ease; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /* transform: rotateX(10deg); */
+    }
+
+    .bmwCars {
+        width: 900px;
+        width: 1100px;
+        position: relative;
+        top: -40px;
+        transform: translate(1100px);
+        transition: all .3s ease;
+        filter:drop-shadow(10px 10px 100px rgb(20, 20, 20)) ;
+        animation: leftRightCollapser2 2s forwards 12s ease;
+    }
+
+    .m3Logo {
+        width: 100px;
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        transition: all .3s ease;
+        opacity: 0;
+        animation: displayYeahh .3s forwards 17s ease;
+    }
+
+    .info {
+        position: absolute;
+        left: 30px;
+        color: aliceblue;
+        bottom: 20px;
+        font-size: 20px;
+        transition: all .3s ease;
+        opacity: 0;
+        animation: displayYeahh .3s forwards 16s ease;
+    }
+
+    .info> :first-child {
+        font-size: 23px;
+        text-align: center;
+        font-weight: bolder;
+        font-family: "Playwrite DE SAS", monospace;
+        color: #000000;
+    }
+
+    .info p {
+        margin: 10px 0;
+        font-size: 17px;
+        margin-left: 20px;
+        color: #ffffff;
+    }
+
+    .logoIntro {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99;
+        color: aliceblue;
+        background-color: #050505;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: logoAnimationDisplayNone .3s forwards 9s ease;
+
+        /* display: none; */
+
+    }
+
+    .bmwLogo {
+        position: relative;
+        z-index: 5;
+        width: 0px;
+        transform: translateX(100px);
+        animation: logoOpener 3s forwards 1s ease, logoSider 3s forwards 4s ease;
+
+    }
+
+    .bmw-txt {
+        position: relative;
+        z-index: 4;
+        font-size: 65px;
+        font-weight: 700;
+        transform: translateX(-30px);
+        color: white;
+        opacity: 0;
+        transition: all .3s ease;
+        animation: displayYeahh .3s forwards 6s ease;
+        display: flex;
+    }
+
+    .bmw-fullform-txt {
+        margin: 10px 5px;
+        font-size: 17px;
+        font-weight: 800;
+        transform: translateX(-52px);
+        opacity: 0;
+        transition: all .3s ease;
+        animation: displayYeahh .3s forwards 6s ease;
+    }
+
+    .bmw-txt :first-child {
+        background-color: #015eac;
+        margin: 0;
+        padding: 10px 9px;
+        transform: skewX(-15deg);
+    }
+
+    .bmw-txt :nth-child(2) {
+        background-color: #0a1536;
+        margin: 0;
+        padding: 10px 9px;
+        transform: skewX(-15deg);
+    }
+
+    .bmw-txt :nth-child(3) {
+        background-color: #b4203a;
+        margin: 0;
+        padding: 10px 9px;
+        transform: skewX(-15deg);
+    }
+
+    @keyframes leftRightCollapser {
+        from {}
+
+        to {
+            transform: translate(0px);
+        }
+    }
+
+    @keyframes logoOpener {
+        100% {
+            width: 170px;
+            filter: drop-shadow(20px 20px 100px #0099daad);
+        }
+    }
+
+    @keyframes logoSider {
+        100% {
+            transform: translateX(-50px);
+        }
+    }
+
+    @keyframes displayYeahh {
+        100% {
+            opacity: 1;
+        }
+    }
+
+@keyframes logoAnimationDisplayNone {
+    100% {
+        opacity: 0;
+        visibility: hidden;  
+        pointer-events: none;
+    }
+}
+
+    @keyframes overflowController {
+        100% {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    }
+
+    @keyframes leftRightCollapser2 {
+        from {}
+
+        to {
+            transform: translate(-200px);
+        }
+    }
+
+    .txt {
+        position: absolute;
+        top: 0px;
+        right: 130px;
+        line-height: 160px;
+        transition: all .3s ease;
+        opacity: 0;
+        animation: displayYeahh .5s forwards 14.3s ease;
+    }
+
+    .let-txt {
+        font-size: 65px;
+        color: white;
+        font-family: "Playwrite DE SAS", monospace;
+        text-align: it;
+    }
+
+    .fly-txt {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 435px;
+        color: white;
+        font-weight: 800;
+    }
+
+    .search-svg {
+        width: 26px;
+        cursor: pointer;
+    }
+
+    .hamburger-svg {
+        width: 26px;
+        cursor: pointer;
+    }
+
+    .search-input {
+        position: absolute;
+        top: -125px;
+        transition: all .3s ease;
+        left: 6%;
+        width: 300px;
+        height: 100%;
+        outline: none;
+        background-color: #ffffff31;
+        color: #ffffff;
+        border: none;
+        font-size: 16px;
+        padding: 0 18px;
+    }
+
+    .lists {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        font-weight: 600;
+    }
+
+    .lists li {
+        transition: all .3s ease;
+        cursor: pointer;
+    }
+
+    .lists:hover li:not(:hover) {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        gap: 9vw;
+        list-style: none;
+        margin: 30px 5vw;
+        color: #009ADA;
+        font-weight: 700;
+        transition: all .3s ease;
+        cursor: pointer;
+        opacity: 0;
+        animation: displayYeahh .3s forwards 16s ease;
+    }
+
+    .footer li:first-child {
+        border: 1px solid #009ADA;
+        padding: 10px 30px;
+        border-radius: 50px;
+        transition: all .3s ease;
+    }
+
+    .footer li:first-child:hover {
+        border: 1px solid #009ADA;
+        color: #009ADA;
+        box-shadow: 0 0 50px #0099da91;
+    }
+
+    .footer li:hover {
+        color: #0099da79;
+    }
+
+    .left-txt {
+        margin-top: -100px;
+        margin-left: -300px;
+        max-width: 50%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-direction: column;
+        opacity: 0;
+        animation: displayYeahh .3s forwards 14.3s ease;
+    }
+
+    .left-bmw-txt {
+        display: flex;
+        font-size: 40px;
+    }
+
+    .left-bmw-txt :first-child {
+        background-color: #015eac;
+        margin: 0;
+        padding: 20px 10px;
+        transform: skewX(-15deg);
+    }
+
+    .left-bmw-txt :nth-child(2) {
+        background-color: #0a1536;
+        margin: 0;
+        padding: 20px 10px;
+        transform: skewX(-15deg);
+    }
+
+    .left-bmw-txt :nth-child(3) {
+        background-color: #b4203a;
+        margin: 0;
+        padding: 20px 10px;
+        transform: skewX(-15deg);
+    }
+
+    .fullform-of-bmw-txt {
+        color: #c4c4c4;
+        font-weight: 700;
+        font-size: 18px;
+        font-family: "Playwrite DE SAS", cursive;
+    }
+
+    .para-txt {
+        color: #c4c4c4;
+        font-size: 18px;
+        letter-spacing: 2px;
+        line-height: 30px;
+        margin-top: 15px;
+    }
+
+    /* ------------------------------- */
+    /* From Uiverse.io by Cornerstone-04 */
+    .box {
+        width: 140px;
+        height: auto;
+        float: left;
+        transition: .5s linear;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        padding: 15px;
+        cursor: pointer;
+        text-align: center;
+        color: #009ADA;
+        margin: 20px 5px;
+        background: transparent;
+        text-transform: uppercase;
+        font-weight: 900;
+        box-shadow: 0 10px 50px #0099da2a;
+    }
+    .box3{        
+        box-shadow: 0 10px 50px rgb(212, 212, 48, .2);
+        color:rgb(212, 212, 48);
+    }
+    .box4{        
+        box-shadow: 0 10px 50px  rgb(192, 0, 0,.2);
+        color: rgb(192, 0, 0);
+    }
+
+    .box2 {
+        width: 160px;
+    }
+
+    .box:before {
+        position: absolute;
+        content: '';
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        width: 100%;
+        border-bottom: 2px solid transparent;
+        border-left: 2px solid transparent;
+        box-sizing: border-box;
+        transform: translateX(100%);
+    }
+
+    .box:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        border-top: 2px solid transparent;
+        border-right: 2px solid transparent;
+        box-sizing: border-box;
+        transform: translateX(-100%);
+    }
+
+    .box:hover {
+        box-shadow: 0 15px 50px #0099da44;
+    }
+
+    .box:hover:before {
+        border-color: #009ADA;
+        height: 100%;
+        transform: translateX(0);
+        transition: .3s transform linear, .3s height linear .3s;
+    }
+
+    .box:hover:after {
+        border-color: #009ADA;
+        height: 100%;
+        transform: translateX(0);
+        transition: .3s transform linear, .3s height linear .5s;
+    }
+    .box3:hover:before {
+        border-color: rgb(212, 212, 48);
+    }
+
+    .box3:hover:after {
+        border-color: rgb(212, 212, 48);
+    }
+       .box3:hover {
+        box-shadow: 0 15px 50px rgb(212, 212, 48, .3);
+    }
+    .box4:hover:before {
+        border-color: rgb(192, 0, 0);
+    }
+
+    .box4:hover:after {
+        border-color: rgb(192, 0, 0);
+    }
+       .box4:hover {
+        box-shadow: 0 15px 50px rgb(192, 0, 0, .3);
+    }
+
+    button {
+        color: #009ADA;
+        text-decoration: none;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background: transparent;
+    }
+    
+
+    /* ------------------------------- */
+    .keypoints-par div {
+        color: rgb(0, 0, 0);
+        font-weight: 700;
+        margin: 10px;
+        margin-left: 20px;
+        font-size: 22px;
+    }
+
+    .keypoints-par ul {
+        list-style: decimal;
+        margin-left: 50px;
+        color: #ffffff;
+    }
+
+    .keypoints-par ul li {
+        font-size: 16px;
+        padding: 1px;
+    }
+    .right2{
+        background-color: rgb(212, 212, 48);
+    }
+    .right3{
+        background-color: rgb(192, 0, 0);
+    }
+        .footer2{
+        color: rgb(212, 212, 48);
+    }
+
+    .footer2 li:first-child {
+        border: 1px solid rgb(212, 212, 48);
+    }
+
+    .footer2 li:first-child:hover {
+        border: 1px solid rgb(212, 212, 48);
+        color: rgb(212, 212, 48);
+        box-shadow: 0 0 50px rgb(212, 212, 48, 0.5);
+    }
+
+    .footer2 li:hover {
+        color: rgba(212, 212, 48, 0.5);
+    }
+        .footer3{
+        color: rgb(192, 0, 0);
+    }
+
+    .footer3 li:first-child {
+        border: 1px solid rgb(192, 0, 0);
+    }
+
+    .footer3 li:first-child:hover {
+        border: 1px solid rgb(192, 0, 0);
+        color: rgb(192, 0, 0);
+        box-shadow: 0 0 50px rgb(192, 0, 0, .5);
+    }
+
+    .footer3 li:hover {
+        color: rgb(192, 0, 0,.5);
+    }
+     .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: white;
+            transform: scale(1.4);
+        }
+</style>
+
+<body>
+    <section class="first">
+
+
+        <nav class="navBar">
+            <div>
+                <img class="hamburger-svg" src="/svg/hamburger.svg" alt="">
+                <img class="search-svg" src="/svg/search.svg" alt="">
+                <input class="search-input" placeholder="Search Your Dream..." type="search">
+            </div>
+            <img class="nav-logo" src="/Images/bmw logo.jpg" alt="">
+            <ol class="lists">
+                <li>Vehicles</li>
+                <li>Designs</li>
+                <li>Art & Culture</li>
+            </ol>
+        </nav>
+
+        <div class="logoIntro">
+            <img class="bmwLogo" src="/Images/bmw logo.jpg" alt="">
+            <div>
+                <div class="bmw-txt">
+                    <div>B</div>
+                    <div>M</div>
+                    <div>W</div>
+                </div>
+                <div class="bmw-fullform-txt">Bayerische Motoren Werke</div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="left">
+                <div class="left-txt">
+                    <div class="left-bmw-txt">
+                        <div>B</div>
+                        <div>M</div>
+                        <div>W</div>
+                    </div>
+                    <div class="fullform-of-bmw-txt">Bayerische Motoren Werke</div>
+                    <div class="para-txt">The BMW Group is the world's leading provider of premium cars and motorcycles
+                        and the home of
+                        the
+                        BMW, MINI, Rolls-Royce and BMW Motorrad brands. Our vehicles and products are tailored to the
+                        needs
+                        of our customers and constantly enhanced – with a clear focus on sustainability and the
+                        conservation
+                        of resources.</div>
+                    <div>
+                        <button>
+                            <span class="Discver-btn box">
+                                Discover More
+                            </span>
+                        </button>
+                        <button>
+                            <span class="Discver-btn box box2">
+                                Explore Gallrey
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <ol class="footer">
+                    <li>About This Car</li>
+                    <li>Model</li>
+                    <li>Top Speed</li>
+                    <li>Explore More</li>
+                </ol>
+            </div>
+            <div class="right">
+                <div class="txt">
+                    <i class="let-txt">Let's</i>
+                    <div class="fly-txt">FLY</div>
+                </div>
+                <!-- <img class="bmwCars" src="/Images/BMW car.jpg" alt=""> -->
+                <img class="bmwCars" src="/Images/bmw2.png" alt="">
+                <img class="m3Logo" src="/Images/m3 logo.png" alt="">
+                <div class="info">
+                    <div>BMW M3 COUPE</div>
+                    <p>The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house
+                        motorsport division, BMW M GmbH. M3 models have been produced for every generation of 3 Series
+                        since the E30 M3 was introduced in 1986.</p>
+                    <div class="keypoints-par">
+                        <div> Keypoints:</div>
+                        <ul>
+                            <li>TwinPower Turbo inline 6-cylinder petrol engine.</li>
+                            <li>510 hp</li>
+                            <li> 650 Nm</li>
+                            <li> RW</li>
+                            <li> 0–100 km/h (3.5s) </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class=" second">
+        <div class="container">
+            <div class="left left2">
+                <div class="left-txt">
+                    <div class="left-bmw-txt">
+                        <div>B</div>
+                        <div>M</div>
+                        <div>W</div>
+                    </div>
+                    <div class="fullform-of-bmw-txt">Bayerische Motoren Werke</div>
+                    <div class="para-txt">The BMW Group is the world's leading provider of premium cars and motorcycles
+                        and the home of
+                        the
+                        BMW, MINI, Rolls-Royce and BMW Motorrad brands. Our vehicles and products are tailored to the
+                        needs
+                        of our customers and constantly enhanced – with a clear focus on sustainability and the
+                        conservation
+                        of resources.</div>
+                    <div>
+                        <button>
+                            <span class="Discver-btn box box3">
+                                Discover More
+                            </span>
+                        </button>
+                        <button>
+                            <span class="Discver-btn box box2 box3">
+                                Explore Gallrey
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <ol class="footer footer2">
+                    <li>About This Car</li>
+                    <li>Model</li>
+                    <li>Top Speed</li>
+                    <li>Explore More</li>
+                </ol>
+            </div>
+            <div class="right right2">
+                <div class="txt">
+                    <i class="let-txt">Let's</i>
+                    <div class="fly-txt">FLY</div>
+                </div>
+                <img class="bmwCars" src="/Images/bmw1.png" alt="">
+                <img class="m3Logo" src="/Images/m3 logo.png" alt="">
+                <div class="info">
+                    <div>BMW M3 COUPE</div>
+                    <p>The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house
+                        motorsport division, BMW M GmbH. M3 models have been produced for every generation of 3 Series
+                        since the E30 M3 was introduced in 1986.</p>
+                    <div class="keypoints-par">
+                        <div> Keypoints:</div>
+                        <ul>
+                            <li>TwinPower Turbo inline 6-cylinder petrol engine.</li>
+                            <li>510 hp</li>
+                            <li> 650 Nm</li>
+                            <li> RW</li>
+                            <li> 0–100 km/h (3.5s) </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class=" third">
+        <div class="container">
+            <div class="left left2">
+                <div class="left-txt">
+                    <div class="left-bmw-txt">
+                        <div>B</div>
+                        <div>M</div>
+                        <div>W</div>
+                    </div>
+                    <div class="fullform-of-bmw-txt">Bayerische Motoren Werke</div>
+                    <div class="para-txt">The BMW Group is the world's leading provider of premium cars and motorcycles
+                        and the home of
+                        the
+                        BMW, MINI, Rolls-Royce and BMW Motorrad brands. Our vehicles and products are tailored to the
+                        needs
+                        of our customers and constantly enhanced – with a clear focus on sustainability and the
+                        conservation
+                        of resources.</div>
+                    <div>
+                        <button>
+                            <span class="Discver-btn box box4">
+                                Discover More
+                            </span>
+                        </button>
+                        <button>
+                            <span class="Discver-btn box box2 box4">
+                                Explore Gallrey
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <ol class="footer footer3">
+                    <li>About This Car</li>
+                    <li>Model</li>
+                    <li>Top Speed</li>
+                    <li>Explore More</li>
+                </ol>
+            </div>
+            <div class="right right3">
+                <div class="txt">
+                    <i class="let-txt">Let's</i>
+                    <div class="fly-txt">FLY</div>
+                </div>
+                <img class="bmwCars" src="/Images/h-bmw3.png" alt="">
+                <img class="m3Logo" src="/Images/m3 logo.png" alt="">
+                <div class="info">
+                    <div>BMW M3 COUPE</div>
+                    <p>The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house
+                        motorsport division, BMW M GmbH. M3 models have been produced for every generation of 3 Series
+                        since the E30 M3 was introduced in 1986.</p>
+                    <div class="keypoints-par">
+                        <div> Keypoints:</div>
+                        <ul>
+                            <li>TwinPower Turbo inline 6-cylinder petrol engine.</li>
+                            <li>510 hp</li>
+                            <li> 650 Nm</li>
+                            <li> RW</li>
+                            <li> 0–100 km/h (3.5s) </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+         <div class="nav-dots">
+            <div class="dot active" data-section="1"></div>
+            <div class="dot" data-section="2"></div>
+            <div class="dot" data-section="3"></div>
+        </div>
+    <script>
+        const searchInput = document.querySelector(".search-input");
+        document.querySelector(".search-svg").addEventListener("click", () => {
+            if (searchInput.style.top === "0px") {
+                searchInput.style.top = "-125px";
+            } else {
+                searchInput.style.top = "0px";
+            }
+        });
+
+
+
+
+
+         document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const dots = document.querySelectorAll('.dot');
+            const container = document.querySelector('.container');
+            let isScrolling = false;
+            
+            // Function to update active section based on scroll position
+            function updateActiveSection() {
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+                
+                // Determine which section should be active
+                let activeIndex = 0;
+                if (scrollY < windowHeight * 0.5) {
+                    activeIndex = 0;
+                } else if (scrollY < windowHeight * 1.5) {
+                    activeIndex = 1;
+                } else {
+                    activeIndex = 2;
+                }
+                
+                // Update sections
+                sections.forEach((section, index) => {
+                    section.classList.remove('active', 'inactive');
+                    
+                    if (index === activeIndex) {
+                        section.classList.add('active');
+                    } else if (index < activeIndex) {
+                        section.classList.add('inactive');
+                    }
+                });
+                
+                // Update navigation dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                });
+            }
+            
+            // Scroll event listener with throttling
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    window.requestAnimationFrame(function() {
+                        updateActiveSection();
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
+                }
+            });
+            
+            // Click event for navigation dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const sectionIndex = parseInt(this.getAttribute('data-section')) - 1;
+                    window.scrollTo({
+                        top: sectionIndex * window.innerHeight,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Initialize on page load
+            updateActiveSection();
+        });
+    </script>
+</body>
+
+</html>
